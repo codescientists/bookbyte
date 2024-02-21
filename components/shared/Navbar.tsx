@@ -13,8 +13,8 @@ const Navbar = () => {
   const menus = [
     { title: "Home", path: "/" },
     { title: "Ebooks", path: "/ebooks" },
-    { title: "About Us", path: "/about" },
-    { title: "Contact Us", path: "/contact" },
+    { title: "Create", path: "/create" },
+    { title: "My Profile", path: "/profile" },
   ]
 
   return (
@@ -25,7 +25,7 @@ const Navbar = () => {
             <img src="./assets/logo.png" alt="BookByte" className="h-14 w-14 rounded-md"/>
             <div className="ml-2">
                 <h1 className="text-2xl font-bold">BookByte</h1>
-                <p className="text-xs text-slate-600">Ebook Store</p>
+                <p className="text-xs text-slate-600">Ebook Marketplace</p>
             </div>
           </Link>
           <div className="md:hidden">

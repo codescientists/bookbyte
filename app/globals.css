@@ -74,3 +74,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Solving React Simple Star Rating Error which was aligning stars vertically  */
+svg.star-svg {
+  display: inline;
+}
