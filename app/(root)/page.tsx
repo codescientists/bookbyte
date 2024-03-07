@@ -1,4 +1,5 @@
 import HomeHero from "@/components/HomeHero"
+import Collection from "@/components/shared/Collection";
 import EbookCard from "@/components/shared/EbookCard";
 import { getAllEbooks } from "@/lib/actions/ebook.actions";
 import { SearchParamProps } from "@/types";
@@ -21,11 +22,17 @@ const Home = async ({searchParams}: SearchParamProps) => {
       <HomeHero />
       <section>
         <h2 className="text-center text-3xl font-bold mb-6">Trending Ebooks</h2>
-        <div className="grid grid-cols-5 gap-5 my-10">
-        {ebooks?.data.map((ebook: any)=>(
-          <EbookCard ebook={ebook} />
-        ))}
-        </div>
+          <section className="wrapper my-8">
+            <Collection
+              data={ebooks?.data}
+              emptyTitle="No ebook found!"
+              emptyStateSubtext="Come back later"
+              collectionType="All_Ebooks"
+              limit={6}
+              page={page}
+              totalPages={ebooks?.totalPages}
+            />
+          </section>
       </section>
     </div>
   )

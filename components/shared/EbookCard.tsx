@@ -1,43 +1,74 @@
-import {
-    Card,
-    CardContent,
-} from "@/components/ui/card"
-import Link from "next/link"
-import RatingComponent from "./RatingComponent"
-import { HeartIcon, ShoppingCartIcon } from "lucide-react"
 
-const EbookCard = ({ebook}: any) => {
+import { IEbook } from '@/lib/database/models/ebook.model'
+import { auth } from '@clerk/nextjs'
+import { ArrowRight, EditIcon } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import RatingComponent from './RatingComponent'
+
+type CardProps = {
+  ebook: IEbook,
+  hasOrderLink?: boolean,
+  hidePrice?: boolean
+}
+
+const EbookCard = ({ ebook, hasOrderLink, hidePrice }: CardProps) => {
+  const { sessionClaims } = auth();
+  const userId = sessionClaims?.userId as string;
+
+  const isEbookCreator = userId === ebook.publisher._id.toString();
+
   return (
-    <Card className="relative">
-        {/* Floating buttons  */}
-        <div className="absolute top-2 right-2">
-            <button 
-                // onClick={()=>handleCart()}
-                title='Add to cart' 
-                className="rounded-full border flex items-center justify-center h-10 w-10 bg-white hover:bg-red-500 transition hover:text-white mb-2">
-                <ShoppingCartIcon className="h-5 w-5"/>
-            </button>
-            <button title="Add to wishlist" className="rounded-full border flex items-center justify-center h-10 w-10 bg-white hover:bg-red-500 transition hover:text-white">
-                <HeartIcon className="h-5 w-5"/>
-            </button>
+    <div className="group relative w-64 flex flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg py-8">
+        <img src={ebook.imageUrl} alt="..." className="h-44 w-full object-contain"/>
+
+      {isEbookCreator && !hidePrice && (
+        <div className="absolute right-2 top-2 flex flex-col gap-4 rounded-xl bg-white p-3 shadow-sm transition-all">
+          <Link href={`/update/${ebook._id}`}>
+            <EditIcon/>
+          </Link>
+
+          {/* <DeleteConfirmation ebookId={ebook._id} /> */}
         </div>
-        
-        <CardContent className="py-5">
-            <img src={ebook.imageUrl} alt="..." className="h-48 w-full object-contain"/>
-            <div className="flex flex-col justify-between h-full my-2">
-                <Link href={`/ebooks/${ebook._id}`}>
-                    <p className="text-lg font-semibold line-clamp-2 flex-1 text-black hover:text-red-600">{ebook.title}</p>
-                </Link>
+      )}
 
-                <h5 className="text-xl font-semibold text-red-600 my-2">
-                    {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(ebook.price)}
-                </h5>     
+      <div
+        className="flex flex-col gap-3 p-5 md:gap-4"
+      > 
+       {!hidePrice && <div className="flex gap-2">
+          <p className="w-min rounded-full bg-green-100 px-2 py-1 text-green-60">
+            <span className="text-sm font-semibold my-2">
+              {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(ebook.price))}
+            </span> 
+          </p>
+          <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
+            {ebook.category.name}
+          </p>
+        </div>}
 
-                <RatingComponent />
-            </div>
-        </CardContent>
-    </Card>
+        <Link href={`/ebooks/${ebook._id}`}>
+            <p className="text-lg font-semibold line-clamp-1 flex-1 text-black hover:text-red-600" title={ebook.title}>{ebook.title}</p>
+        </Link>
+
+        <RatingComponent />
+
+
+        <div className="flex-between w-full">
+          <p className="text-gray-600">
+            {ebook.publisher.firstName} {ebook.publisher.lastName}
+          </p>
+
+            {hasOrderLink && (
+            <Link href={`/orders?ebookId=${ebook._id}`} className="flex gap-2">
+              <p className="text-primary-500">Order Details</p>
+              <ArrowRight/>
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default EbookCard
+export default EbookCard;

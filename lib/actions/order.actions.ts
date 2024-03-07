@@ -102,6 +102,7 @@ export async function getOrdersByEbook({ searchString, ebookId }: GetOrdersByEbo
           buyer: {
             $concat: ['$buyer.firstName', ' ', '$buyer.lastName'],
           },
+          buyerId: '$buyer._id'
         },
       },
       {
@@ -136,7 +137,7 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
         populate: {
           path: 'publisher',
           model: User,
-          select: '_id firstName lastName',
+          select: '_id firstName lastName username',
         },
       })
 

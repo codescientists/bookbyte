@@ -1,31 +1,24 @@
-'use client'
-
+import Collection from '@/components/shared/Collection'
 import EbookCard from '@/components/shared/EbookCard'
 import { Button } from '@/components/ui/button'
 import { getEbooksByUser } from '@/lib/actions/ebook.actions'
+import { getOrdersByUser } from '@/lib/actions/order.actions'
+import { IOrder } from '@/lib/database/models/order.model'
 import { SearchParamProps } from '@/types'
-import { useUser } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
 
+const ProfilePage = async ({ searchParams }: SearchParamProps) => {
+  const { sessionClaims } = auth();
+  const userId = sessionClaims?.userId as string;
 
-const ProfilePage = ({ searchParams }: SearchParamProps) => {
-    const { user } = useUser();
-    const userId = user?.publicMetadata.userId as string;
+  const ordersPage = Number(searchParams?.ordersPage) || 1;
+  const ebooksPage = Number(searchParams?.ebooksPage) || 1;
 
-    const [organizedEbooks, setOrganizedEbooks] = useState([]);
+  const orders = await getOrdersByUser({ userId, page: ordersPage})
 
-    useEffect(() => {
-      const getEbooks = async () => {
-        const fetchedEbooks = await getEbooksByUser({ userId, page: 1 })    
-        setOrganizedEbooks(fetchedEbooks?.data)
-      }
-
-      getEbooks();
-    }, [])
-
-    console.log(organizedEbooks)
-    
+  const orderedEbooks = orders?.data.map((order: IOrder) => order.ebook) || [];
+  const publishedEbooks = await getEbooksByUser({ userId, page: ebooksPage });
 
   return (
     <>
@@ -41,12 +34,15 @@ const ProfilePage = ({ searchParams }: SearchParamProps) => {
         </div>
       </section>
 
-      <section className="wrapper my-8">
-        <div className="grid grid-cols-5 gap-5 my-10">
-            {organizedEbooks?.map((ebook: any)=>(
-              <EbookCard ebook={ebook} key={ebook._id} />
-            ))}
-            </div>
+      <section className="my-8">
+        <Collection
+          data={orderedEbooks}
+          emptyTitle="You haven't purchased any ebook yet!"
+          emptyStateSubtext=""
+          collectionType="My_Ebooks"
+          limit={6}
+          page={ordersPage}
+        />
       </section>
 
       {/* Ebooks Created */}
@@ -61,12 +57,15 @@ const ProfilePage = ({ searchParams }: SearchParamProps) => {
         </div>
       </section>
 
-      <section className="wrapper my-8">
-        <div className="grid grid-cols-5 gap-5 my-10">
-            {organizedEbooks?.map((ebook: any)=>(
-            <EbookCard ebook={ebook} key={ebook._id} />
-            ))}
-        </div>
+      <section className="my-8">
+        <Collection
+          data={publishedEbooks?.data}
+          emptyTitle="You haven't created any ebook yet!"
+          emptyStateSubtext=""
+          collectionType="ebooks_Organized"
+          limit={6}
+          page={ordersPage}
+        />
       </section>
     </>
   )

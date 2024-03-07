@@ -76,7 +76,39 @@
 }
 
 
-/* Solving React Simple Star Rating Error which was aligning stars vertically  */
-svg.star-svg {
-  display: inline;
+
+@layer utilities {
+  .wrapper {
+    @apply max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full;
+  }
+
+  /* SHADCN OVERRIDES */
+  .select-field {
+    @apply w-full bg-gray-50 h-[54px] placeholder:text-gray-500 rounded-full px-5 py-3 border-none focus-visible:ring-transparent focus:ring-transparent !important;
+  }
+  
+  .input-field {
+    @apply bg-gray-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-gray-500 rounded-full px-4 py-3 border-none focus-visible:ring-transparent !important;
+  }
+
+  .textarea {
+    @apply bg-gray-50 flex flex-1 placeholder:text-gray-500 px-5 py-3 border-none focus-visible:ring-transparent !important;
+  }
+  
+  .button {
+    @apply rounded-full h-[54px];
+  }
+  
+  .select-item {
+    @apply py-3 cursor-pointer  focus:bg-gray-50;
+  }
+  
+  .toggle-switch {
+    @apply bg-gray-300 !important;
+  }
 }
+  
+  /* Solving React Simple Star Rating Error which was aligning stars vertically  */
+  svg.star-svg {
+    display: inline;
+  }

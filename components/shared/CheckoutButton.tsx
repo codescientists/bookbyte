@@ -14,11 +14,11 @@ const CheckoutButton = ({ ebook }: { ebook: IEbook }) => {
   return (
     <div className="flex items-center gap-3">
         <SignedOut>
-        <Button asChild className="button rounded-full" size="lg">
-            <Link href="/sign-in">
-            Get Tickets
-            </Link>
-        </Button>
+          <Button asChild className="button rounded-full" size="lg">
+              <Link href="/sign-in">
+              Get Tickets
+              </Link>
+          </Button>
         </SignedOut>
 
         <SignedIn>

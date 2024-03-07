@@ -4,13 +4,13 @@ import Navbar from "@/components/shared/Navbar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section>
-      <div>
-        <Navbar />
+    <div className='flex-1'>
+      <div className="flex h-screen flex-col wrapper">
+        <Navbar/>
         {children}
-        <Footer />
+        <Footer/>
       </div>
-    </section>
+    </div>
   )
 }
 

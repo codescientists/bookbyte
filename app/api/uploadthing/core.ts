@@ -33,8 +33,6 @@ export const ourFileRouter = {
 
     .onUploadComplete(async ({ file }) => {
     
-    console.log("file url", file.url);
-    
     return { message: "PDF Upload Completed" }; 
     }),
         

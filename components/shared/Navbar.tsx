@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { Menu, Search, ShoppingCartIcon, User2Icon } from "lucide-react"
 import { UserButton, useUser } from "@clerk/nextjs"
+import { Button } from "../ui/button"
 
 const Navbar = () => {
   const [state, setState] = React.useState(false);
@@ -51,21 +52,14 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center">
-            <div className="">
-                <button
-                className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-                >
-                <ShoppingCartIcon />
-                </button>
-            </div>
             <div className="ml-2">
                 {
                   isSignedIn ? 
                   <UserButton afterSignOutUrl="/"/>
                   :
-                  <button className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border">
-                    <User2Icon />
-                  </button>
+                  <Button>
+                    <Link href={`/sign-in`}>Login</Link>
+                  </Button>
                 }
             </div>
         </div>

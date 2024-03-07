@@ -81,14 +81,17 @@ const getCategoryByName = async (name: string) => {
 const populateCategory = (query: any) => {
   return query
   .populate({ path: 'category', model: Category, select: '_id name' })
+  .populate({ path: 'publisher', model: User, select: '_id username firstName lastName'})
 }
 
 export async function getAllEbooks({ query, limit = 6, page, category }: GetAllEbooksParams) {
   try {
     await connectToDatabase()
 
-    const titleCondition = query ? { name: { $regex: query, $options: 'i' } } : {}
-    const categoryCondition = category ? await getCategoryByName(category) : null
+    const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
+
+    const categoryCondition = category ? await getCategoryByName(category) : null;
+
     const conditions = {
       $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
     }
@@ -117,13 +120,13 @@ export async function getEbookById(ebookId: string) {
   try {
     await connectToDatabase();
 
-    const ebook = await Ebook.findById(ebookId);
+    const ebook = await populateCategory(Ebook.find({_id: ebookId}));
 
     if (!ebook) {
       throw new Error("Ebook not found");
     }
 
-    return ebook;
+    return JSON.parse(JSON.stringify(ebook[0]));
   } catch (error: any) {
     throw new Error("Error getting ebook by ID: " + error.message);
   }
