@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BookByte - An Ebook MarketPlace
 
-## Getting Started
+BookByte is a dynamic Ebook Marketplace built with a robust tech stack including NextJS, ReactJS, MongoDB, Clerk, UploadThing, ShadCN, Stripe, and more. This platform offers a seamless experience for both buyers and sellers of digital books, fostering a community of literary enthusiasts.
 
-First, run the development server:
+## 🚀 Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Home](https://github.com/codescientists/bookbyte/assets/66505013/6d5b2e76-79ee-4f19-92b1-dfc1076724bd)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 💡 Introduction
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+BookByte is a cutting-edge Ebook Marketplace designed to elevate your reading experience. Discover, purchase, and enjoy a diverse collection of digital books from various genres. Key features include:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- User-Friendly Interface: Navigate through our intuitive interface with ease, ensuring a delightful browsing experience.
 
-## Learn More
+- Extensive Library: Explore a rich selection of ebooks spanning multiple genres, catering to diverse reading preferences.
 
-To learn more about Next.js, take a look at the following resources:
+- Secure Transactions: Enjoy peace of mind with our robust payment system, powered by Stripe, ensuring secure transactions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Personalized Recommendations: Receive tailored recommendations based on your reading history and preferences, enhancing your discovery journey.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Seamless Access: Access your purchased ebooks anytime, anywhere, on any device, ensuring uninterrupted reading pleasure.
 
-## Deploy on Vercel
+## ⚙️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next JS
+- React JS
+- TypeScript
+- Tailwind CSS
+- ShadCN UI
+- MongoDB
+- Express.js
+- Stripe Payment
+- UploadThing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📸 Screenshots
+
+
+**Home Page**
+
+![Home](https://github.com/codescientists/bookbyte/assets/66505013/1ac3f941-b2b8-410e-9f48-a3e36b9ed5f8)
+
+**Sign In Page**
+![Sign In Page](https://github.com/codescientists/bookbyte/assets/66505013/d2b15015-5c8d-433a-b699-dfd503eef53d)
+
+**Sign Up Page**
+
+![Sign Up Page](https://github.com/codescientists/bookbyte/assets/66505013/a2214c03-35af-4f15-be3f-296fb2b9d375)
+
+**All Ebooks Page / Search Page**
+![Screenshot 2024-03-27 162217](https://github.com/codescientists/bookbyte/assets/66505013/22895546-886c-400f-bd84-8f9ee20f69bb)
+
+
+**Ebook Description Page**
+![Screenshot 2024-03-27 162308](https://github.com/codescientists/bookbyte/assets/66505013/e542e6ff-23fe-456f-aa69-5eb92d686ca4)
+
+**Profile Page**
+![Screenshot 2024-03-27 162500](https://github.com/codescientists/bookbyte/assets/66505013/2c7bee11-384d-43f9-af93-dcafc6e3c7ce)
+
+**Create Ebook Page**
+![Screenshot 2024-03-27 162627](https://github.com/codescientists/bookbyte/assets/66505013/75ebc434-95c2-44a6-ad12-8a3a9b40d993)
+
+**Update Ebook Page**
+![Screenshot 2024-03-27 162740](https://github.com/codescientists/bookbyte/assets/66505013/53431801-56c4-49ff-8a50-a11d0e3673f2)
+
+**Ebook Purchasers Details Page**
+![Screenshot 2024-03-27 162834](https://github.com/codescientists/bookbyte/assets/66505013/9f4736bc-bce5-4a77-a336-a5b60a30ab16)
+
+
